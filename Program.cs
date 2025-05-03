@@ -1,6 +1,7 @@
 namespace DotNETConsole.MathGame;
 
 using DotNETConsole.MathGame.UI;
+using DotNETConsole.MathGame.Enums;
 
 public class Program
 {
@@ -8,6 +9,7 @@ public class Program
     {
         MainUI GameUI = new MainUI();
         GameUI.Welcome();
-        GameUI.StartGame();
+        QuestionType gameType = GameUI.GameType();
+        GameUI.StartGame(gameType);
     }
 }
