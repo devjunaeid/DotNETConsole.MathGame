@@ -1,11 +1,28 @@
 namespace DotNETConsole.MathGame.UI;
+using DotNETConsole.MathGame.DB;
+using DotNETConsole.MathGame.Models;
 
-using Spectre.Console;
-
-public static class MainUI
+internal class MainUI
 {
-    public static void Welcome()
+    static int score { get; set; } = 0;
+    internal void Welcome()
     {
-        AnsiConsole.Write(new Markup("[bold yellow]Hello[/] [red]World![/]"));
+        Console.WriteLine("Welcome!!!");
+    }
+
+    internal void StartGame()
+    {
+        DB database = new DB();
+        database.INIT();
+        foreach (Questions q in database.QuestionsTable)
+        {
+            Console.WriteLine($"Current Score: {score}");
+            bool correct = q.AskQuestion();
+            if (correct)
+            {
+                score += 5;
+            }
+            Console.Clear();
+        }
     }
 }
