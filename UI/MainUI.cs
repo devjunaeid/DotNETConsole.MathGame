@@ -94,4 +94,16 @@ internal class MainUI
         Console.SetCursorPosition((Console.WindowWidth - message.Length) / 2, Console.WindowHeight / 2 + 10);
         AnsiConsole.MarkupLine($"[bold red]press 'Esc' to return to the main menu.[/]");
     }
+
+    internal void GameTopBar()
+    {
+        Console.Clear();
+        string message = $"Welcome to MQuiz";
+
+        //Write the message in the middle
+        Console.SetCursorPosition((Console.WindowWidth - message.Length) / 2, 0);
+        AnsiConsole.MarkupLine($"[bold green]-==-{message}-==-[/]");
+        Console.SetCursorPosition((Console.WindowWidth - 10) / 2, 1);
+        AnsiConsole.MarkupLine("author: [blue][link=https://github.com/devjunaeid]devjunaeid[/][/]");
+    }
 }
