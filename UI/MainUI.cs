@@ -6,12 +6,12 @@ using DotNETConsole.MathGame.Enums;
 
 internal class MainUI
 {
-    static int score { get; set; } = 0;
-    static int gameCycle { get; set; } = 0;
+    static int Score { get; set; }
+    static int GameCycle { get; set; }
     static DB database { get; set; } = new DB();
     internal void GameInit()
     {
-        database.INIT();
+        database.Init();
     }
 
     internal MainMenuChoices GameMenuController()
@@ -42,28 +42,28 @@ internal class MainUI
     internal void StartGame(QuestionType gameType)
     {
         //Reset Score.
-        score = 0;
+        Score = 0;
         // Filtering Question from DB based on Game Type.
         List<Questions> filterdQuestions = database.QuestionsTable.Where(q => q.Type == gameType).ToList();
         Scores scoreEntry = new Scores();
-        gameCycle += 1;
-        scoreEntry.Lebel = $"Game {gameCycle}";
+        GameCycle += 1;
+        scoreEntry.Lebel = $"Game {GameCycle}";
         int totalQuestions = filterdQuestions.Count;
         int currentQuestion = 1;
 
         foreach (Questions q in filterdQuestions)
         {
-            string message = $"{scoreEntry.Lebel}:: Type-{gameType} :: Q({currentQuestion}/{totalQuestions}) --------- Current Score: {score}";
+            string message = $"{scoreEntry.Lebel}:: Type-{gameType} :: Q({currentQuestion}/{totalQuestions}) --------- Current Score: {Score}";
             Console.Clear();
             Console.SetCursorPosition((Console.WindowWidth - message.Length) / 2, Console.WindowHeight / 10);
             AnsiConsole.MarkupLine($"[bold blue]{message}[/]");
             bool correct = q.AskQuestion();
             if (correct)
             {
-                score += 5;
+                Score += 5;
             }
             currentQuestion++;
-            scoreEntry.UpdateScore(score);
+            scoreEntry.UpdateScore(Score);
             Console.Clear();
         }
         database.ScoreTable.Add(scoreEntry);
@@ -76,7 +76,7 @@ internal class MainUI
 
         foreach (Scores sc in database.ScoreTable)
         {
-            table.AddRow($"{sc.Lebel}", $"{sc.TimeStamp}", $"{score}");
+            table.AddRow($"{sc.Lebel}", $"{sc.TimeStamp}", $"{Score}");
         }
 
         AnsiConsole.Write(table);
@@ -86,7 +86,7 @@ internal class MainUI
     internal void GameEndMessage()
     {
         Console.Clear();
-        string message = $"Game Over! Your final score is: {score}";
+        string message = $"Game Over! Your final score is: {Score}";
 
         //Write the message in the middle
         Console.SetCursorPosition((Console.WindowWidth - message.Length) / 2, Console.WindowHeight / 2);

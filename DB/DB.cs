@@ -8,7 +8,7 @@ internal class DB
     internal List<Questions> QuestionsTable = new List<Questions>();
     internal List<Scores> ScoreTable = new List<Scores>();
 
-    internal void INIT()
+    internal void Init()
     {
         Random random = new Random();
 
