@@ -8,10 +8,10 @@ internal class MainUI
 {
     static int Score { get; set; }
     static int GameCycle { get; set; }
-    static DB database { get; set; } = new DB();
+    static DB Database { get; set; } = new DB();
     internal void GameInit()
     {
-        database.Init();
+        Database.Init();
     }
 
     internal MainMenuChoices GameMenuController()
@@ -44,7 +44,7 @@ internal class MainUI
         //Reset Score.
         Score = 0;
         // Filtering Question from DB based on Game Type.
-        List<Questions> filterdQuestions = database.QuestionsTable.Where(q => q.Type == gameType).ToList();
+        List<Questions> filterdQuestions = Database.QuestionsTable.Where(q => q.Type == gameType).ToList();
         Scores scoreEntry = new Scores();
         GameCycle += 1;
         scoreEntry.Lebel = $"Game {GameCycle}";
@@ -66,7 +66,7 @@ internal class MainUI
             scoreEntry.UpdateScore(Score);
             Console.Clear();
         }
-        database.ScoreTable.Add(scoreEntry);
+        Database.ScoreTable.Add(scoreEntry);
     }
 
     internal void ShowScore()
@@ -74,7 +74,7 @@ internal class MainUI
         var table = new Table();
         table.AddColumns(new[] { "Entry", "DateTime", "Score" });
 
-        foreach (Scores sc in database.ScoreTable)
+        foreach (Scores sc in Database.ScoreTable)
         {
             table.AddRow($"{sc.Lebel}", $"{sc.TimeStamp}", $"{Score}");
         }
