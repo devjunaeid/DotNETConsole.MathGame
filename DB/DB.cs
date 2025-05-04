@@ -63,7 +63,7 @@ internal class DB
                 }
                 else
                 {
-                    int randomResult = random.Next(0, tempSecondNumber - tempFirstNumber - 1);
+                    int randomResult = random.Next(0, tempSecondNumber - tempFirstNumber + 1);
                     if (randomResult == result)
                     {
                         randomResult += random.Next(1, 10);
