@@ -12,7 +12,6 @@ internal class Questions : IQuestions
 
     public bool AskQuestion()
     {
-        // AnsiConsole.Write(new Markup(Question));
         var choice = AnsiConsole.Prompt(
             new SelectionPrompt<(Answer, string)>()
                 .Title(Question)
